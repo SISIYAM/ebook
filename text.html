@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="bn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>বর্তনী ও চলবিদ্যুৎ</title>
+    <style>
+      @page {
+        size: A4;
+        margin: 0;
+      }
+
+      body {
+        font-family: "SolaimanLipi", Arial, sans-serif;
+        line-height: 1.8;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #f5f5f5;
+        min-height: 100vh;
+      }
+
+      .container {
+        width: 90%;
+        max-width: 210mm; /* A4 width */
+        margin: 10px auto;
+        padding: 20px 40px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        background-color: white;
+        color: #333;
+        overflow: hidden;
+        box-sizing: border-box;
+        page-break-before: always; /* Ensures the content breaks onto a new page */
+      }
+
+      .header {
+        text-align: center;
+        font-size: 1.8em;
+        font-weight: bold;
+        margin-bottom: 20px;
+      }
+
+      .paragraph {
+        text-align: justify;
+        margin-bottom: 20px;
+      }
+
+      .list {
+        margin-left: 20px;
+        list-style-type: disc;
+        margin-bottom: 20px;
+      }
+
+      .image-placeholder {
+        width: 100%;
+        height: auto;
+        text-align: center;
+        margin: 20px 0;
+        page-break-after: always; /* Ensures the next content goes to a new page */
+      }
+
+      .footer-title {
+        margin-top: 30px;
+        font-weight: bold;
+      }
+
+      .container * {
+        max-width: 100%;
+        word-break: break-word;
+      }
+
+      /* Tooltip styling */
+      .tooltip {
+        position: absolute;
+        background-color: #333;
+        color: #fff;
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-size: 0.9em;
+        visibility: hidden;
+        opacity: 0;
+        transition: opacity 0.3s;
+        z-index: 10;
+      }
+
+      /* Media Query for small devices */
+      @media screen and (max-width: 768px) {
+        .container {
+          padding: 15px;
+          box-shadow: none;
+        }
+
+        .header {
+          font-size: 1.5em;
+        }
+
+        .image-placeholder {
+          height: 100px;
+          line-height: 100px;
+        }
+
+        body {
+          align-items: flex-start;
+          min-height: auto;
+        }
+      }
+
+      /* Media Query for very small devices */
+      @media screen and (max-width: 480px) {
+        .header {
+          font-size: 1.2em;
+        }
+
+        .paragraph {
+          font-size: 0.9em;
+        }
+
+        .list {
+          font-size: 0.9em;
+          margin-left: 15px;
+        }
+
+        .image-placeholder {
+          height: 80px;
+          line-height: 80px;
+        }
+      }
+
+      #popupWord {
+        text-decoration: underline;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        নবম অধ্যায়<br />
+        বর্তনী ও চলবিদ্যুৎ
+      </div>
+
+      <div class="paragraph">
+        আমরা জানি, পরিবাহীর নির্দিষ্টকৃত বাহিরে
+        <span id="popupWord">ইলেকট্রনসমূহ</span> বিদ্যুতের ধারক। কিন্তু কিছু
+        পদার্থের পরিবাহীর সর্বাধিক অংশের
+        <span id="popupWord">ইলেকট্রনসমূহ</span> নির্দিষ্টকরণের সাথে দুর্বলভাবে
+        যুক্ত থাকে। এ সকল পদার্থ <span id="popupWord">ইলেকট্রনসমূহ</span> সহজে
+        চলাচল করতে পারে এবং এগুলোর পরিবাহী ধাতু।
+      </div>
+
+      <!-- Tooltip Element -->
+      <div id="tooltip" class="tooltip"></div>
+    </div>
+
+    <script>
+      const popupWords = document.querySelectorAll("#popupWord");
+      const tooltip = document.getElementById("tooltip");
+
+      popupWords.forEach((word) => {
+        word.addEventListener("click", (e) => {
+          const rect = e.target.getBoundingClientRect();
+          tooltip.style.top = `${rect.top - tooltip.offsetHeight - 10}px`;
+          tooltip.style.left = `${
+            rect.left + rect.width / 2 - tooltip.offsetWidth / 2
+          }px`;
+          tooltip.textContent = "This is a tooltip for ইলেকট্রনসমূহ";
+          tooltip.style.visibility = "visible";
+          tooltip.style.opacity = "1";
+
+          // Hide tooltip after 3 seconds
+          setTimeout(() => {
+            tooltip.style.visibility = "hidden";
+            tooltip.style.opacity = "0";
+          }, 3000);
+        });
+      });
+    </script>
+  </body>
+</html>
